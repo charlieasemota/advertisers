@@ -1,0 +1,77 @@
+{
+  "@context": "/contexts/Advertiser",
+  "@id": "/advertisers",
+  "@type": "hydra:Collection",
+  "hydra:member": [
+    {
+      "@id": "/advertisers/1",
+      "@type": "Advertiser",
+      "id": 1,
+      "name": "Fiat",
+      "orgurl": "http://www.fiat.co.uk/",
+      "firstName": "John",
+      "lastName": "Smith",
+      "email": "info@fiat.co.uk",
+      "telephone": "02012345678",
+      "updatedTs": "2017-08-07T14:36:49+00:00",
+      "address": "/addresses/1"
+    },
+    {
+      "@id": "/advertisers/2",
+      "@type": "Advertiser",
+      "id": 2,
+      "name": "Mercedes-Benz",
+      "orgurl": "http://www.mercedes-benz.co.uk/",
+      "firstName": "Jim",
+      "lastName": "Hendrix",
+      "email": "info@mercedes-benz.co.uk",
+      "telephone": "02012345678",
+      "updatedTs": "2017-08-08T14:36:49+00:00",
+      "address": "/addresses/2"
+    },
+    {
+      "@id": "/advertisers/3",
+      "@type": "Advertiser",
+      "id": 3,
+      "name": "Microsoft",
+      "orgurl": "http://www.microsoft.co.uk/",
+      "firstName": "John",
+      "lastName": "Snow",
+      "email": "info@microsoft.co.uk",
+      "telephone": "02012345678",
+      "updatedTs": "2017-08-09T14:36:49+00:00",
+      "address": "/addresses/3"
+    },
+    {
+      "@id": "/advertisers/4",
+      "@type": "Advertiser",
+      "id": 4,
+      "name": "Apple",
+      "orgurl": "http://www.apple.com/uk/",
+      "firstName": "Tyron",
+      "lastName": "Lannister",
+      "email": "info@apple.com",
+      "telephone": "02012345678",
+      "updatedTs": "2017-08-09T14:36:49+00:00",
+      "address": "/addresses/4"
+    },
+    {
+      "@id": "/advertisers/5",
+      "@type": "Advertiser",
+      "id": 5,
+      "name": "Nike",
+      "orgurl": "http://www.nike.com/uk/",
+      "firstName": "Tyron",
+      "lastName": "Lannister",
+      "email": "info@apple.com",
+      "telephone": "02012345678",
+      "updatedTs": "2017-08-09T14:36:49+00:00",
+      "address": "/addresses/5"
+    }
+  ],
+  "hydra:totalItems": 5,
+  "hydra:view": {
+    "@id": "/advertisers",
+    "@type": "hydra:PartialCollectionView"
+  }
+}

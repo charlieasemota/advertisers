@@ -1,0 +1,9 @@
+{
+  "@id": "/addresses/4",
+  "@type": "Address",
+  "id": 1,
+  "address": "Convertr Media 6-8, St. John's Square",
+  "city": "London",
+  "postcode": "EC1M 4NH",
+  "updatedTs": "2017-04-03T10:01:27+00:00"
+}
