@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private $getAdvertisers?: Subscription;
     
     title = 'advertisers';
-    advertisers: Advertiser[] = [];
+    advertisers?: Advertiser[];
     
     ngOnInit(): void {
         this.$getAdvertisers = this.addressService.getAddresses().pipe(
@@ -34,8 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 item.addressObj = address;
                 return item;
             }))
-        )
-            .subscribe((data: Advertiser[]) => this.advertisers = data);
+        ).subscribe(data => this.advertisers = data)
     }
     
     ngOnDestroy(): void {

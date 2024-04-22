@@ -1,3 +1,4 @@
 export const environment = {
-    isMock: true
+    isMock: true,
+    apiBase: '/mocks/',
 };

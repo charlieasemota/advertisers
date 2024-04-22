@@ -70,7 +70,7 @@ export class AddressesService {
         );
         
         return this.storedAddresses.get(id)!.pipe(
-            switchMap(address => address ? of(address) : request)
+            switchMap(address => address.id ? of(address) : request)
         );
     }
     

@@ -1,9 +1,9 @@
 <div class="container">
     <header>
-        <h1>Advertisers</h1>
+        <h1 data-testid="page-title">Advertisers</h1>
         <app-create-advertiser-modal/>
     </header>
-    <table class="table">
+    <table class="table" data-testid="advertisers-table">
         <thead>
         <tr>
             <th>Name</th>
@@ -15,13 +15,17 @@
         </thead>
         <tbody class="table-group-divider">
         <tr *ngFor="let advertiser of advertisers">
-            <td>{{advertiser.name}}</td>
-            <td>{{advertiser.orgurl}}</td>
-            <td>{{advertiser.telephone}}</td>
-            <td>{{advertiser.addressObj?.address}}</td>
-            <td>{{advertiser.addressObj?.postcode}}</td>
+            <td data-testid="table-name-column">{{advertiser.name}}</td>
+            <td data-testid="table-url-column">
+                <a [href]="advertiser.orgurl" *ngIf="advertiser.orgurl">
+                    {{advertiser.orgurl}}
+                </a>
+            </td>
+            <td data-testid="table-phone-column">{{advertiser.telephone}}</td>
+            <td data-testid="table-address-column">{{advertiser.addressObj?.address}}</td>
+            <td data-testid="table-postcode-column">{{advertiser.addressObj?.postcode}}</td>
         </tr>
-        <tr *ngIf="!advertisers.length">
+        <tr *ngIf="!advertisers?.length" data-testid="table-no-advertisers">
             <td colspan="5">No Advertisers Found</td>
         </tr>
         </tbody>

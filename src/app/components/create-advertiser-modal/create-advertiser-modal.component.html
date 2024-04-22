@@ -1,9 +1,14 @@
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAdvertiser">
+<button
+        data-testid="button-create-advertiser"
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#createAdvertiser">
     Add new advertiser
 </button>
 
 <!-- Basic modal implementation-->
-<div class="modal" id="createAdvertiser" tabindex="-1" #MODAL>
+<div class="modal" id="createAdvertiser" data-testid="advertiser-modal" tabindex="-1" #MODAL>
     <div class="modal-dialog">
         <form class="modal-content" [formGroup]="advertiserForm" (ngSubmit)="handleForm()">
             <div class="modal-header">
@@ -121,12 +126,12 @@
                         </div>
                     </div>
 
-                    <div class="alert alert-danger" role="alert" *ngIf="error">
+                    <div class="alert alert-danger" role="alert" *ngIf="error" data-testid="submit-error">
                         Something went wrong.
                     </div>
                 </ng-container>
                 <ng-template #SUCCESS_VIEW>
-                    <div class="success">
+                    <div class="success" data-testid="submit-success">
                         <i class="bi-check-all"></i>
                         <div>
                             Success!
@@ -136,8 +141,15 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ success ? "Close" : "Cancel" }}</button>
-                <button type="submit" class="btn btn-primary" *ngIf="!success">Save changes</button>
+                <button data-testid="cancel-button" type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ success ? "Close" : "Cancel" }}</button>
+                <button
+                    [disabled]="advertiserForm.invalid"
+                    data-testid="submit-button"
+                    type="submit"
+                    class="btn btn-primary"
+                    *ngIf="!success">
+                    Save changes
+                </button>
             </div>
         </form>
     </div>
