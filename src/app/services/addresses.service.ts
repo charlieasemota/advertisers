@@ -23,7 +23,7 @@ export class AddressesService {
     private path = '/addresses';
     private storeCountUpdate = new Subject<boolean>();
     
-    readonly storedAddresses = new Map<string, BehaviorSubject<Address>>();
+    readonly storedAddresses = new Map<number, BehaviorSubject<Address>>();
     
     /**
      * Returns an observable with the existing addresses.
@@ -50,7 +50,7 @@ export class AddressesService {
             catchError(() => of<Address[]>([])),
             tap((addresses) => {
                 if (!addresses.length) return;
-                addresses.forEach(address => this.storedAddresses.set(address.advertiserAddress, new BehaviorSubject(address)));
+                addresses.forEach(address => this.storedAddresses.set(address.id, new BehaviorSubject(address)));
                 this.storeCountUpdate.next(true)
             }),
             switchMap(() => this.getStoredList())
@@ -62,14 +62,14 @@ export class AddressesService {
     /**
      * Return a stored address or request it from the API then store it.
      */
-    getAddress(address: string): Observable<Address> {
-        if (!this.storedAddresses.has(address)) this.storedAddresses.set(address, new BehaviorSubject({} as Address));
-        const request = this.httpClient.get<AddressResponse>(`${address}`).pipe(
+    getAddress(id: number): Observable<Address> {
+        if (!this.storedAddresses.has(id)) this.storedAddresses.set(id, new BehaviorSubject({} as Address));
+        const request = this.httpClient.get<AddressResponse>(`${this.path}/${id}`).pipe(
             map(response => new Address(response)),
-            tap(response => this.storedAddresses.get(address)!.next(response))
+            tap(response => this.storedAddresses.get(id)!.next(response))
         );
         
-        return this.storedAddresses.get(address)!.pipe(
+        return this.storedAddresses.get(id)!.pipe(
             switchMap(address => address ? of(address) : request)
         );
     }
@@ -81,7 +81,7 @@ export class AddressesService {
         return this.httpClient.post<AddressResponse>(this.path, form).pipe(
             map(response => new Address(response)),
             tap(response => {
-                this.storedAddresses.set(response.advertiserAddress, new BehaviorSubject(response));
+                this.storedAddresses.set(response.id, new BehaviorSubject(response));
                 this.storeCountUpdate.next(true);
             })
         );

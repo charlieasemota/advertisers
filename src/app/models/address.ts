@@ -1,13 +1,11 @@
 export class Address {
     id: number;
-    advertiserAddress: string;
     address: string;
     city: string;
     postcode: string;
     updatedTs?: Date;
     
     constructor(data: AddressResponse) {
-        this.advertiserAddress = data["@id"];
         this.id = data.id;
         this.address = data.address;
         this.city = data.city;

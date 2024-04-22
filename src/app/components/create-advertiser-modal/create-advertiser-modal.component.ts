@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AdvertisersService } from "../../services/advertisers.service";
+import { AddressesService } from "../../services/addresses.service";
 
 @Component({
     selector: 'app-create-advertiser-modal',
@@ -12,6 +14,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angul
     styleUrl: './create-advertiser-modal.component.scss'
 })
 export class CreateAdvertiserModalComponent {
+    private advertiserService = inject(AdvertisersService);
+    private addressesService = inject(AddressesService);
+    
     advertiserForm = new FormGroup({
         name: new FormControl(),
         orgurl: new FormControl(),

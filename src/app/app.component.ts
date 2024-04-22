@@ -27,9 +27,10 @@ export class AppComponent implements OnInit, OnDestroy {
         this.$getAdvertisers = this.addressService.getAddresses().pipe(
             switchMap(() => this.advertisersService.getAdvertisers()),
             map((advertisers: Advertiser[]) => advertisers.map(item => {
-                if (!item.address) return item;
+                const addressId = item.address?.split('/').pop();
+                if (!addressId) return item;
                 
-                const address = this.addressService.storedAddresses.get(item.address)?.value;
+                const address = this.addressService.storedAddresses.get(Number(addressId))?.value;
                 item.addressObj = address;
                 return item;
             }))
