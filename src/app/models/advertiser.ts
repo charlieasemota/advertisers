@@ -1,14 +1,14 @@
 import { Address } from "./address";
 
 export class Advertiser {
-    id: number;
+    id?: number;
     name: string;
     orgurl: string;
     firstName: string;
     lastName: string;
     email: string;
     telephone: string;
-    updatedTs: Date;
+    updatedTs?: Date;
     address: string;
     addressObj?: Address;
     
@@ -20,7 +20,7 @@ export class Advertiser {
         this.lastName = data.lastName;
         this.email = data.email;
         this.telephone = data.telephone;
-        this.updatedTs = new Date(data.updatedTs);
+        this.updatedTs = data.updatedTs ? new Date(data.updatedTs) : undefined;
         this.address = data.address;
     }
 }

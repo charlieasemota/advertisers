@@ -2,26 +2,28 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
 
+## Notes
+
+POST Request are intercepted so that they return the request object with a generated ID, these are used when creating new advertisers and addresses
+
+The modal implementation is quite basic, in a real project where there will be multiple modals with different content it will maake more sense to have a service to add the modals in the dom.
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+![Error screenshot](./readme-assets/img.png)
 
-## Code scaffolding
+Because there were some issues with the endpoints - was receiving a "usage limit" error - I created a separate configuration called Mock.
+This will work on the interceptor layer redirecting the requests to the JSON files in the `src/mocks` folder.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To run this you can use `npm run start:mock`.
+
+Alternatively, running `npm start` will run in dev mode with requests going to the provided endpoints
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

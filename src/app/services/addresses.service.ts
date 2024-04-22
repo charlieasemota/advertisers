@@ -50,7 +50,7 @@ export class AddressesService {
             catchError(() => of<Address[]>([])),
             tap((addresses) => {
                 if (!addresses.length) return;
-                addresses.forEach(address => this.storedAddresses.set(address.id, new BehaviorSubject(address)));
+                addresses.forEach(address => this.storedAddresses.set(address.id!, new BehaviorSubject(address)));
                 this.storeCountUpdate.next(true)
             }),
             switchMap(() => this.getStoredList())
@@ -81,7 +81,7 @@ export class AddressesService {
         return this.httpClient.post<AddressResponse>(this.path, form).pipe(
             map(response => new Address(response)),
             tap(response => {
-                this.storedAddresses.set(response.id, new BehaviorSubject(response));
+                this.storedAddresses.set(response.id!, new BehaviorSubject(response));
                 this.storeCountUpdate.next(true);
             })
         );

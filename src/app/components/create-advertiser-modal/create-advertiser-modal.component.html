@@ -3,57 +3,142 @@
 </button>
 
 <!-- Basic modal implementation-->
-<div class="modal" id="createAdvertiser" tabindex="-1" #modal>
+<div class="modal" id="createAdvertiser" tabindex="-1" #MODAL>
     <div class="modal-dialog">
-        <div class="modal-content">
+        <form class="modal-content" [formGroup]="advertiserForm" (ngSubmit)="handleForm()">
             <div class="modal-header">
                 <h5 class="modal-title">Add new advertiser</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="advertiserForm" (submit)="handleForm()">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" formControlName="name">
+                <ng-container *ngIf="!success; else SUCCESS_VIEW">
+                    <div class="mb-3" *ngIf="advertiserForm.controls.name as name">
+                        <label for="name" class="form-label">Organization Name</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                [class.is-invalid]="name.invalid"
+                                id="name"
+                                formControlName="name">
+                        <div class="invalid-feedback">
+                            Please provide a valid Organization Name.
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" *ngIf="advertiserForm.controls.orgurl as orgurl">
                         <label for="orgurl" class="form-label">Organization URL</label>
-                        <input type="text" class="form-control" id="orgurl" formControlName="orgurl">
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="orgurl"
+                                [class.is-invalid]="orgurl.invalid"
+                                formControlName="orgurl">
+                        <div class="invalid-feedback">
+                            Please provide a valid URL.
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" *ngIf="advertiserForm.controls.firstName as firtName">
                         <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName" formControlName="firstName">
+                        <input
+                                type="text"
+                                class="form-control"
+                                [class.is-invalid]="firtName.invalid"
+                                id="firstName"
+                                formControlName="firstName">
+                        <div class="invalid-feedback">
+                            Please provide a valid First Name.
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" *ngIf="advertiserForm.controls.lastName as lastName">
                         <label for="lastName" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                        <input
+                                type="text"
+                                class="form-control"
+                                [class.is-invalid]="lastName.invalid"
+                                id="lastName"
+                                formControlName="lastName">
+                        <div class="invalid-feedback">
+                            Please provide a valid Last Name.
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" *ngIf="advertiserForm.controls.email as email">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" formControlName="email">
+                        <input
+                                type="email"
+                                class="form-control"
+                                [class.is-invalid]="email.invalid"
+                                id="email"
+                                formControlName="email">
+                        <div class="invalid-feedback">
+                            Please provide a valid Email.
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" *ngIf="advertiserForm.controls.telephone as telephone">
                         <label for="telephone" class="form-label">Telephone</label>
-                        <input type="tel" class="form-control" id="telephone" formControlName="telephone">
+                        <input
+                                type="tel"
+                                class="form-control"
+                                [class.is-invalid]="telephone.invalid"
+                                id="telephone"
+                                formControlName="telephone">
+                        <div class="invalid-feedback">
+                            Please provide a valid Telephone.
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" *ngIf="advertiserForm.controls.address as address">
                         <label for="address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address" formControlName="address">
+                        <input
+                                type="text"
+                                class="form-control"
+                                [class.is-invalid]="address.invalid"
+                                id="address"
+                                formControlName="address">
+                        <div class="invalid-feedback">
+                            Please provide a valid Address.
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" *ngIf="advertiserForm.controls.city as city">
                         <label for="city" class="form-label">City</label>
-                        <input type="text" class="form-control" id="city" formControlName="city">
+                        <input
+                                type="text"
+                                class="form-control"
+                                [class.is-invalid]="city.invalid"
+                                id="city"
+                                formControlName="city">
+                        <div class="invalid-feedback">
+                            Please provide a valid City.
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" *ngIf="advertiserForm.controls.postcode as postcode">
                         <label for="postcode" class="form-label">Postcode</label>
-                        <input type="text" class="form-control" id="postcode" formControlName="postcode">
+                        <input
+                                type="text"
+                                class="form-control"
+                                [class.is-invalid]="postcode.invalid"
+                                id="postcode"
+                                formControlName="postcode">
+                        <div class="invalid-feedback">
+                            Please provide a valid Postcode.
+                        </div>
                     </div>
-                </form>
+
+                    <div class="alert alert-danger" role="alert" *ngIf="error">
+                        Something went wrong.
+                    </div>
+                </ng-container>
+                <ng-template #SUCCESS_VIEW>
+                    <div class="success">
+                        <i class="bi-check-all"></i>
+                        <div>
+                            Success!
+                        </div>
+                    </div>
+                </ng-template>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ success ? "Close" : "Cancel" }}</button>
+                <button type="submit" class="btn btn-primary" *ngIf="!success">Save changes</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>

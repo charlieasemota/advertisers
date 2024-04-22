@@ -50,7 +50,7 @@ export class AdvertisersService {
             catchError(() => of<Advertiser[]>([])),
             tap((advertisers) => {
                 if (!advertisers.length) return;
-                advertisers.forEach(advertiser => this.storedAdvertisers.set(advertiser.id, new BehaviorSubject(advertiser)));
+                advertisers.forEach(advertiser => this.storedAdvertisers.set(advertiser.id!, new BehaviorSubject(advertiser)));
                 this.storeCountUpdate.next(true)
             }),
             switchMap(() => this.getStoredList())
@@ -66,7 +66,7 @@ export class AdvertisersService {
         return this.httpClient.post<AdvertiserResponse>(this.path, form).pipe(
             map(response => new Advertiser(response)),
             tap(response => {
-                this.storedAdvertisers.set(response.id, new BehaviorSubject(response));
+                this.storedAdvertisers.set(response.id!, new BehaviorSubject(response));
                 this.storeCountUpdate.next(true);
             })
         );
